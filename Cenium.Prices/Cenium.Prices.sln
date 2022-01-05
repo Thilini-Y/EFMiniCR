@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cenium.Prices.Data", "Cenium.Prices.Data\Cenium.Prices.Data.csproj", "{D7C81881-FB84-4E16-8788-480CE34B9ACD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cenium.Prices.Activities", "Cenium.Prices.Activities\Cenium.Prices.Activities.csproj", "{9FB45AD4-D433-4313-900E-66D48AA0C76E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cenium.Prices.Client.Windows", "Cenium.Prices.Client.Windows\Cenium.Prices.Client.Windows.csproj", "{83EB32AD-6414-4499-9FF3-8CB01494FE30}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D7C81881-FB84-4E16-8788-480CE34B9ACD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7C81881-FB84-4E16-8788-480CE34B9ACD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7C81881-FB84-4E16-8788-480CE34B9ACD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7C81881-FB84-4E16-8788-480CE34B9ACD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FB45AD4-D433-4313-900E-66D48AA0C76E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FB45AD4-D433-4313-900E-66D48AA0C76E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FB45AD4-D433-4313-900E-66D48AA0C76E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FB45AD4-D433-4313-900E-66D48AA0C76E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83EB32AD-6414-4499-9FF3-8CB01494FE30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83EB32AD-6414-4499-9FF3-8CB01494FE30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83EB32AD-6414-4499-9FF3-8CB01494FE30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83EB32AD-6414-4499-9FF3-8CB01494FE30}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

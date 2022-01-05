@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ui>
+  <!-- Add panes here-->
+  <panes>
+    
+    <pane id="contacts.pane.contact.general" type="standard.pane.grouplayout" >
+      <layout>
+
+        <section id="left"  >
+          <items>
+
+            <item id="ProfileImage" label="" type="standard.controls.data.imagebox" width="150" labelVisibility="Collapsed" column="0" >
+              <properties>
+                <property id="IsScaleToFit" value="true" type="Bool" />
+                <property id="EmptyHelpText" value="Click to select a main image or drop a main image here." />
+                <property id="Height" value="150" type="Double" />
+                <property id="VerticalAlignment" value="Top" />
+                <property id="HorizontalAlignment" value="Left" />
+              </properties>
+            </item>
+
+          </items>
+        </section>
+
+        <section id="top" >
+          <items>
+            <item id="ContactNumber" label="Contact No" type="TextBox"  readOnly="true"  column="0"/>
+            
+             <item id="Name" label="Name" type="standard.controls.namebox"  >
+              <bindings>
+                <binding property="FirstName" bindTo="FirstName" />
+                <binding property="MiddleName" bindTo="MiddleName" />
+                <binding property="LastName" bindTo="LastName" />
+              </bindings>
+            </item>
+            <item id="Name" label="Full Name" type="TextBox"  readOnly="false"  column="0"/>
+           
+          </items>
+        </section>
+
+      </layout>
+    </pane>
+
+    <pane id="contacts.pane.contact.address" type="standard.pane.grouplayout">
+      <layout>
+        <section id="addressdata">
+          <items>
+
+            <item id="Address" label="Address" type="TextBox"  readOnly="false"  />
+            <item id="City" label="City" type="TextBox"  readOnly="false"  />
+            <item id="Province" label="Province" type="TextBox"  readOnly="false"  />
+            <item id="Country" label="Country" type="TextBox"  readOnly="false"  />
+            <item id="ZipCode" label="Zip Code" type="TextBox"  readOnly="false"  />
+
+
+          </items>
+        </section>
+      </layout>
+
+    </pane>
+
+    <pane id="contacts.pane.contact.identity" type="standard.pane.grouplayout" >
+      <layout>
+        <section id="identitydata" >
+          <items>
+
+             <item id="IdNumber" label="Id Number" type="TextBox"  readOnly="false" column="0"  colspan="3" />
+              <item id="Gender" label="Gender" type="ComboBox" valueList="enum:contacts.enumeration.genderenum"  readOnly="false" column="0"  colspan="3" />
+             <item id="DOB" label="Date of Birth" type="DatePicker"  readOnly="false" column="0" colspan="3" >
+                <bindings>
+                  <binding property="DisplayDateEnd" bindTo="DisplayDateEnd" />
+                </bindings>
+              </item>  
+            
+              <item id="AgeYears" label="Age  Years:" type="TextBox" readOnly="true" width="35" column="1" colspan="2" />
+              <item id="AgeMonths"  label="Age Months:" type="TextBox" width="35" readOnly="true" column="1" colspan="2" />
+            
+            
+          </items>
+        </section>
+      </layout>
+
+    </pane>
+    
+    
+
+    <pane id="contact.pane.contacts.email.top" type="framework.pane.DataGridPane">
+      <layout>
+        <section id="gridview">
+          <items>
+           
+            <item id="EmailAddress" label="Email Address" type="Column" width="*" />
+          
+          </items>
+        </section>
+      </layout>
+
+    </pane>
+
+    <pane id="contact.pane.contacts.phone.top" type="framework.pane.DataGridPane">
+      <layout>
+        <section id="gridview">
+          <items>
+
+            <item id="ContactNumber" label="Contact Number" type="Column" width="*" />
+
+          </items>
+        </section>
+      </layout>
+
+    </pane>
+
+
+    <pane id="contacts.pane.contact.details.contactdata" type="standard.pane.grouplayout" >
+      <layout>
+      
+        <section id="contactdata" >
+          <items>
+            <item id="Emails" type="contact.pane.contacts.email.top" labelVisibility="Collapsed" column="0" >
+              <properties>
+                <property id="Height" value="200" type="Double" />
+              </properties>
+            </item>
+            <item id="Emails" label="" type="framework.controls.data.DataCollectionCommandBar" >
+              <properties>
+                <property id="ParentControlName" value="EmailAddress" />
+              </properties>
+            </item>
+            <item id="PhoneNumbers" type="contact.pane.contacts.phone.top" labelVisibility="Collapsed" column="1" >
+              <properties>
+                <property id="Height" value="200" type="Double" />
+              </properties>
+            </item>
+            <item id="PhoneNumbers" label="" type="framework.controls.data.DataCollectionCommandBar" column="1" >
+              <properties>
+                <property id="ParentControlName" value="ContactNumber" />
+              </properties>
+            </item>
+          </items>
+        </section>
+        
+      </layout>
+    </pane>
+
+
+
+  </panes>
+  <!-- Add dialogs here -->
+  <dialogs>
+
+  </dialogs>
+
+  <!-- Add pages here-->
+  <pages>
+    <page id="contacts.page.contact" name="Contacts" description="Add and maintain contacts information"
+            model="framework.pages.listviewmodel" type="framework.listitempage">
+      
+      <properties>
+        <property id="Columns" value="2" type="Int" />
+       <property id="ColumnLayout" value="WideFirstColumn" />
+      </properties>
+
+      <modelProperties>
+        <property id="CreateMethod" value="Contacts/Contact/Create" />
+        <property id="QueryMethod" value="Contacts/Contact/Query" />
+        <property id="GetMethod" value="Contacts/Contact/Get/{ContactId}" />
+        <property id="UpdateMethod" value="Contacts/Contact/Update" />
+        <property id="RemoveMethod" value="Contacts/Contact/Delete" />
+        <property id="IncludeChildRecords" value="true" type="Bool" />
+      </modelProperties>
+
+      <layout>
+        
+          <section id="listView" readOnly="true" >
+          <items>
+            <item id="ContactNumber" type="TextBlock" labelVisibility="Collapsed">
+              <properties>
+                <property id="TextStyle" value="TitleText" />
+              </properties>
+            </item>
+            <item id="Name" type="TextBlock" labelVisibility="Collapsed">
+              <properties>
+                <property id="TextStyle" value="SubtleText" />
+              </properties>
+            </item>
+          </items>
+        </section>
+            
+        <section id="general" label="General" constraints="column=0" >
+            <items>
+              <item id="generaltopleft" label="" labelVisibility="Collapsed" type="contacts.pane.contact.general" />
+              
+            </items>
+         </section>
+        <section id="address" label="Address" constraints="column=1">
+          <items>
+            <item id="generaltopright" label="" labelVisibility="Collapsed" type="contacts.pane.contact.address" />
+          </items>
+        </section>
+
+
+        <section id="identiy" label="Identity" constraints="column=1">
+          <items>
+            <item id="generalbottomleft" label="" labelVisibility="Collapsed" type="contacts.pane.contact.identity" />
+            
+          </items>
+        </section>
+            
+        <section id="contactsdetails" label="Contact Details" constraints="column=0">
+          <items>
+            <item id="generalbottomright" label="" labelVisibility="Collapsed" type="contacts.pane.contact.details.contactdata" />
+          </items>
+        </section>
+            
+            
+      </layout>
+
+      <actions>
+        <action id="clear" type="framework.ClearAction" />
+        <action id="refresh" type="framework.RefreshAction" />
+        <action id="refreshitem" type="standard.actions.refreshitem" />
+        <action id="save" type="framework.SaveAction" />
+        <action id="add" type="framework.CreateAction" />
+        
+        <action id="delete" type="framework.DeleteAction" >
+          <properties>
+            <property id="IsAutoSave" value="true" type="Bool" />
+            <property id="IsUserConfirmationRequired" value="true" type="Bool" />
+          </properties>
+        </action>
+
+      </actions>
+
+    </page>
+  </pages>
+
+</ui>

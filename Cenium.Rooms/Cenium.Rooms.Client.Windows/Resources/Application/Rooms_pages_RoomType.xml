@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ui>
+  <!-- Add panes here-->
+  <panes>  
+
+    <pane id="rooms.pane.roomtype.details" type="standard.pane.grouplayout" columns="2">
+      <layout>
+
+         <section id="general" label="General" constraints="column=0">
+          <items>
+            <item id="RoomTypeName" label="Room Type" type="TextBox"  readOnly="false"  />
+            <item id="RoomTypeDescription" label="Description" type="specialized.multilinetextbox" readOnly="false"  />
+            <item id="Capacity" label="Capacity" type="TextBox" readOnly="false"  />
+          </items>
+        </section>
+        
+        <section id="price" label="Price Details" constraints="column=1" >
+          <items>
+            <!--<item id="PriceId" label="!prices.price.code" type="framework.controls.data.ReferenceComboBox" readOnly="false" valueList="Prices/Price/Query" column="0" >
+               <properties>
+                <property id="DisplayPropertyName" value="Code" />
+               
+              </properties>
+              </item>-->
+            
+           <item id="Code" label="Price Code" type="standard.controls.data.valuelistlookup" readOnly="false" valueList="Prices/Price/Query" column="0" >
+               <properties>
+                <property id="CopyPropertyNames" value="Code" />
+              </properties>
+              <bindings>
+                <binding property="DisplayValue" bindTo="Code" readOnly="true" />
+              </bindings>
+            </item>
+           
+          </items>
+        </section>
+        
+      </layout>
+    </pane>
+
+
+    <pane id="rooms.pane.roomtype.details.rooms" type="standard.pane.grouplayout" columns="1">
+      <layout>
+        <section id="general" label="Rooms">
+          <items>
+
+            <item id="Rooms" labelVisibility="Collapsed" type="rooms.pane.roomtype.details.rooms.roomdetails"  readOnly="false" />
+
+          </items>
+        </section>
+      </layout>
+    </pane>
+
+    <pane id="rooms.pane.roomtype.details.rooms.roomdetails" type="framework.pane.DataGridPane">
+      <layout>
+        <section id="gridview" readOnly="false">
+          <items>
+
+            <item id="RoomNumber" label="!rooms.room.roomnumber" type="column"  readOnly="false"  width="1*"/>
+            <item id="RoomStatus" label="!rooms.room.roomstatus" type="column"  readOnly="false"  width="1*"/>
+            <item id="AdditionalDetails" label="!rooms.room.additionaldetails" type="column"  readOnly="false"  width="1*"/>
+
+
+          </items>
+        </section>
+      </layout>
+    </pane>
+
+
+
+
+    <pane id="rooms.pane.roomtype.details.features" type="standard.pane.grouplayout" columns="1">
+      <layout>
+        <section id="general" label="Features">
+          <items>
+
+            <item id="FeatureRoomTypes" labelVisibility="Collapsed" type="rooms.pane.roomtype.details.features.featuredetails"  readOnly="false" />
+
+          </items>
+        </section>
+      </layout>
+    </pane>
+    
+  <pane id="rooms.pane.roomtype.details.features.featuredetails" type="framework.pane.DataGridPane">
+      <layout>
+        <section id="gridview" readOnly="false">
+          <items>
+            
+            <item id="Feature.FeatureName" label="!rooms.feature.featurename" type="column"  readOnly="false"  width="1*"/>
+            <item id="Feature.Category" label="!rooms.feature.category" type="column"  readOnly="false"  width="1*"/>
+            <item id="Feature.Description" label="!rooms.feature.description" type="column"  readOnly="false"  width="1*"/>
+            
+           
+          </items>
+        </section>
+      </layout>
+    </pane>
+
+
+    <pane id="rooms.roomtype.roomfeatures" type="standard.pane.grouplayout" >
+      <layout>
+
+        <section id="Bottom" label="" readOnly="false" >
+          <items>
+            <item id="FeatureRoomTypes" label="" type="childlistbox" labelVisibility="Collapsed" >
+              <properties>
+                <property id="Height" value="200" type="Double" />
+                <property id="LookupQueryMethod" value="Rooms/Feature/Query" />
+                <property id="LookupDisplayPropertyName" value="FeatureName" />
+                <property id="LookupKeyPropertyName" value="FeatureId" />
+                <property id="DisplayPropertyName" value="Feature.FeatureName" />
+                <property id="KeyPropertyName" value="FeatureId" />
+                <property id="ReferencePropertyName" value="Feature" />
+              </properties>
+            </item>
+          </items>
+        </section>
+
+      </layout>
+    </pane>
+
+
+
+
+  </panes>
+  <!-- Add dialogs here -->
+  <dialogs>
+
+    <dialog id="rooms.dlg.roomtype.roomfeatures" name="Edit Features"
+              description="Edit Features for the selected room type."
+              icon=""
+              contentPanel="framework.ItemDialog" applyButton="false" showHeader="true" readOnly="false">
+      <layout>
+        <section id="roomfeatures" readOnly="false" label="">
+          <items>
+            <item id="item" label="" labelVisibility="Collapsed" type="rooms.roomtype.roomfeatures" width="600" />
+          </items>
+        </section>
+      </layout>
+    </dialog>
+
+  </dialogs>
+
+  <!-- Add pages here-->
+  <pages>
+    <page id="Rooms.page.RoomType" name="RoomTypes" description="Add and maintain room type information"
+            model="framework.pages.listviewmodel" type="standard.pagetype.list"
+            >
+
+      <modelProperties>
+        <property id="CreateMethod" value="Rooms/RoomType/Create" />
+        <property id="QueryMethod" value="Rooms/RoomType/Query" />
+        <property id="GetMethod" value="Rooms/RoomType/Get/{RoomTypeId}" />
+        <property id="UpdateMethod" value="Rooms/RoomType/Update" />
+        <property id="RemoveMethod" value="Rooms/RoomType/Delete" />
+        <property id="IncludeChildRecords" value="true" type="Bool" />
+      </modelProperties>
+
+      <layout>
+        
+        <section id="griditem" readOnly="true">
+          <items>
+            <item id="RoomTypeName" label="RoomType Name" type="Column" width="*"/>
+            <item id="RoomTypeDescription" label="RoomType Description" type="Column" width="*"/>
+            <item id="Capacity" label="Room Capacity" type="Column" width="*"/>
+          </items>
+        </section>
+
+        <section id="summary">
+          <items>
+            <item id="pane" labelVisibility="Collapsed" type="rooms.pane.roomtype.details" />
+            <item id="dummy" labelVisibility="Collapsed" type="rooms.pane.roomtype.details.features" />
+            <item id="roomdummy" labelVisibility="Collapsed" type="rooms.pane.roomtype.details.rooms" />
+            
+          </items>
+        </section>
+
+
+      </layout>
+      
+     <actions>
+        <action id="clear" type="framework.ClearAction" />
+        <action id="refresh" type="framework.RefreshAction" />
+        <action id="refreshitem" type="standard.actions.refreshitem" />
+        <action id="save" type="framework.SaveAction" />
+        <action id="add" type="framework.CreateAction" />
+
+        <action id="delete" type="framework.DeleteAction" >
+          <properties>
+            <property id="IsAutoSave" value="true" type="Bool" />
+            <property id="IsUserConfirmationRequired" value="true" type="Bool" />
+          </properties>
+        </action>
+
+
+       <action id="managefeatures" label="Manage Features" description="Manage features for the selected room type." type="framework.EditDialogAction"
+                displayType="#home" group="Actions"  icon="backoffice.icon.action.roomtype.managefeatures" iconSize="Large">
+         <properties>
+           <property id="DialogId" value="rooms.dlg.roomtype.roomfeatures" />
+           <property id="ActionMethod" value="Rooms/RoomType/Update" />
+           <property id="IncludeChildRecords" value="true" type="Bool" />
+           
+         </properties>
+       </action>
+       
+
+      </actions>
+
+    </page>
+  </pages>
+
+</ui>

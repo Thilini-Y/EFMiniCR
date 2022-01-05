@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ContactsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ContactsModelStoreContainer" />
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ContactsModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false"  xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="ContactsEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" >
+          <EntitySet Name="Contacts" EntityType="ContactsModel.Contact" />
+          <EntitySet Name="Emails" EntityType="ContactsModel.Email" />
+          <AssociationSet Name="ContactEmail" Association="ContactsModel.ContactEmail">
+            <End Role="Contact" EntitySet="Contacts" />
+            <End Role="Email" EntitySet="Emails" />
+          </AssociationSet>
+          <EntitySet Name="PhoneNumbers" EntityType="ContactsModel.PhoneNumber" />
+          <AssociationSet Name="ContactPhoneNumber" Association="ContactsModel.ContactPhoneNumber">
+            <End Role="Contact" EntitySet="Contacts" />
+            <End Role="PhoneNumber" EntitySet="PhoneNumbers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Emails" Relationship="ContactsModel.ContactEmail" FromRole="Contact" ToRole="Email" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" />
+          <Property Name="IdNumber" Type="String" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="PhoneNumbers" Relationship="ContactsModel.ContactPhoneNumber" FromRole="Contact" ToRole="PhoneNumber" />
+          <Property Name="ProfileImage" Type="Guid" Nullable="true" />
+          <Property Name="ContactNumber" Type="String" Nullable="true" />
+          <Property Name="FirstName" Type="String" Nullable="true" />
+          <Property Name="MiddleName" Type="String" Nullable="true" />
+          <Property Name="LastName" Type="String" Nullable="true" />
+          <Property Name="City" Type="String" Nullable="true" />
+          <Property Name="Province" Type="String" Nullable="true" />
+          <Property Name="Country" Type="String" Nullable="true" />
+          <Property Name="ZipCode" Type="String" Nullable="true" />
+          <Property Name="Gender" Type="String" Nullable="true" />
+        </EntityType>
+        <EntityType Name="Email">
+          <Key>
+            <PropertyRef Name="EmailId" />
+          </Key>
+          <Property Name="EmailId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmailAddress" Type="String" Nullable="false" />
+          <NavigationProperty Name="Contact" Relationship="ContactsModel.ContactEmail" FromRole="Email" ToRole="Contact" />
+        </EntityType>
+        <Association Name="ContactEmail">
+          <End Type="ContactsModel.Contact" Role="Contact" Multiplicity="1" />
+          <End Type="ContactsModel.Email" Role="Email" Multiplicity="*" />
+        </Association>
+        <EntityType Name="PhoneNumber">
+          <Key>
+            <PropertyRef Name="PhoneNumberId" />
+          </Key>
+          <Property Name="PhoneNumberId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContactNumber" Type="String" Nullable="false" />
+          <NavigationProperty Name="Contact" Relationship="ContactsModel.ContactPhoneNumber" FromRole="PhoneNumber" ToRole="Contact" />
+        </EntityType>
+        <Association Name="ContactPhoneNumber">
+          <End Type="ContactsModel.Contact" Role="Contact" Multiplicity="1" />
+          <End Type="ContactsModel.PhoneNumber" Role="PhoneNumber" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ContactsModelStoreContainer" CdmEntityContainer="ContactsEntities" />
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="ComponentModel" DisplayType="true" >
+        <EntityTypeShape EntityType="ContactsModel.Contact" Width="2.375" PointX="1.5" PointY="0.625" />
+        <EntityTypeShape EntityType="ContactsModel.Email" Width="2.5" PointX="5.875" PointY="1" />
+        <AssociationConnector Association="ContactsModel.ContactEmail" />
+        <EntityTypeShape EntityType="ContactsModel.PhoneNumber" Width="2.5" PointX="5.875" PointY="3.25" />
+        <AssociationConnector Association="ContactsModel.ContactPhoneNumber" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

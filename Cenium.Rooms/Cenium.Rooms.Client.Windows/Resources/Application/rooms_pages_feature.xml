@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ui>
+  <!-- Add panes here-->
+  <panes>
+
+    <pane id="rooms.pane.feature.details" type="standard.pane.grouplayout" >
+      <layout>
+
+        <section id="column0" label="" >
+          <items>
+            <item id="FeatureName" label="Feature Name" type="TextBox"  readOnly="false" column="0" row="0"/>
+            <item id="Category" label="Category" type="ComboBox" valueList="enum:rooms.enum.featurecategory" readOnly="false"  column="1" row="0"/>
+            <item id="Description" label="Feature Description" type="specialized.multilinetextbox" readOnly="false" column="0" row="1" colspan="2" >
+                <properties>
+                  <property id="Height" value="100" type="Double" />
+                </properties>
+            </item>
+            <item id="Amount" label="Item Amount" type="TextBox" readOnly="false" column="0" row="2"/>
+            
+          </items>
+        </section>
+
+      </layout>
+    </pane>
+
+  </panes>
+  <!-- Add dialogs here -->
+  <dialogs>
+
+  </dialogs>
+
+  <!-- Add pages here-->
+  <pages>
+    <page id="rooms.page.feature" name="Features" description="Add and maintain room features information"
+            model="framework.pages.listviewmodel" type="framework.listitempage"
+            >
+
+      <modelProperties>
+        <property id="CreateMethod" value="Rooms/Feature/Create" />
+        <property id="QueryMethod" value="Rooms/Feature/Query" />
+        <property id="GetMethod" value="Rooms/Feature/Get/{FeatureId}" />
+        <property id="UpdateMethod" value="Rooms/Feature/Update" />
+        <property id="RemoveMethod" value="Rooms/Feature/Delete" />
+        <property id="IncludeChildRecords" value="true" type="Bool" />
+      </modelProperties>
+
+      <layout>
+        <section id="listView" readOnly="true" >
+          <items>
+            <item id="FeatureName" type="TextBlock" labelVisibility="Collapsed">
+              <properties>
+                <property id="TextStyle" value="TitleText" />
+              </properties>
+            </item>
+            <item id="Category" type="TextBlock" labelVisibility="Collapsed">
+              <properties>
+                <property id="TextStyle" value="SubtleText" />
+              </properties>
+            </item>
+          </items>
+        </section>
+
+        <section id="general" label="Features" constraints="column=0" >
+          <items>
+            <item id="features" label="" labelVisibility="Collapsed" type="rooms.pane.feature.details" />
+
+          </items>
+        </section>
+
+
+      </layout>
+      
+    
+    <actions>
+        <action id="clear" type="framework.ClearAction" />
+        <action id="refresh" type="framework.RefreshAction" />
+        <action id="refreshitem" type="standard.actions.refreshitem" />
+        <action id="save" type="framework.SaveAction" />
+        <action id="add" type="framework.CreateAction" />
+
+        <action id="delete" type="framework.DeleteAction" >
+          <properties>
+            <property id="IsAutoSave" value="true" type="Bool" />
+            <property id="IsUserConfirmationRequired" value="true" type="Bool" />
+          </properties>
+        </action>
+
+      </actions>
+
+    </page>
+  </pages>
+
+</ui>
