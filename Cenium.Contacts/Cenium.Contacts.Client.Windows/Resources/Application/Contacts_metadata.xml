@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<metadata>
+  <enumerations>
+    <!--<enumeration id="mycomponent.enumeration.myenum" values="1=One^2=Two^3=Three" />-->
+    <enumeration id="contacts.enumeration.genderenum" values="Male^Female^Other" />
+  </enumerations>
+
+
+  <entities>
+    
+    <!-- Add entity metadata here. 
+    Use the properties section to set default values
+    Use the extensions section to add property extensions
+    -->
+    <!--<entity id="MyComponent.MyEntity">
+      <properties>
+        <property id="MyProperty" value="[No value]" />
+      </properties>
+      <extensions>
+        <extension property="MyPropertyDisplayText" type="MyComponent.Extensions.MyExtension" >
+          <parameters>
+            <parameter id="PropertyName" value="MyProperty" />
+          </parameters>
+        </extension>
+      </extensions>
+    </entity>-->
+
+
+    <entity id="Contacts.Contact">
+      <properties>
+        <property id="DOB" value="$SYSDATE$" />
+        <property id="ContactNumber" value="Auto" />
+        <property id="ProfileImage" value="$GUID$" />
+      </properties>
+      
+      <extensions>
+
+        <extension property="AgeYears" type="CodeExtension" >
+          <parameters>
+            <parameter id="Source" >
+              <![CDATA[
+            if (record == null) 
+              return null;
+            
+            string DateOfBirth = "DOB";
+            DateTime dob = record.GetValue<DateTime>(DateOfBirth);
+            DateTime today = DateTime.Today;
+            int months = today.Month - dob.Month;
+            int years = today.Year - dob.Year;
+
+            if (today.Day < dob.Day)
+            {
+                months--;
+            }
+
+            if (months < 0)
+            {
+                years--;
+                months += 12;
+            }
+            return years.ToString();
+            
+            ]]>
+            </parameter>
+          </parameters>
+        </extension>
+        
+
+        <extension property="AgeMonths" type="CodeExtension" >
+          <parameters>
+            <parameter id="Source" >
+              <![CDATA[
+            if (record == null) 
+              return null;
+            
+            string DateOfBirth = "DOB";
+            DateTime dob = record.GetValue<DateTime>(DateOfBirth);
+            DateTime today = DateTime.Today;
+            int months = today.Month - dob.Month;
+            int years = today.Year - dob.Year;
+
+            if (today.Day < dob.Day)
+            {
+                months--;
+            }
+
+            if (months < 0)
+            {
+                years--;
+                months += 12;
+            }
+            return months.ToString();
+            
+            ]]>
+            </parameter>
+          </parameters>
+        </extension>
+
+      </extensions>
+      
+    </entity>
+
+  </entities>
+
+</metadata>
+

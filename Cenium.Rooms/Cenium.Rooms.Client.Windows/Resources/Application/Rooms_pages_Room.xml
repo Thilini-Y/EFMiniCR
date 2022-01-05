@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ui>
+  <!-- Add panes here-->
+  <panes>
+
+    <pane id="rooms.pane.room.details" type="standard.pane.grouplayout" columns="2">
+      <layout>
+
+        <section id="general" label="General" constraints="column=0">
+          <items>
+            <item id="RoomNumber" label="Room Number" type="TextBox"  readOnly="true"  />
+            <item id="RoomTypeId" label="Room Type Code" type="framework.controls.data.ReferenceComboBox" readOnly="false" valueList="Rooms/RoomType/Query"  >
+              <properties>
+                <property id="DisplayPropertyName" value="RoomTypeName" />
+
+              </properties>
+            </item>
+            <item id="ColorCode" label="!rooms.room.colorcode" type="telerik.controls.colorpicker" >
+              <properties>
+                <property id="HorizontalAlignment" value="Left" type="Enum"/>
+                <property id="Width" value="100" />
+              </properties>
+            </item>
+            <item id="RoomStatus" label="Room Status" type="TextBox" readOnly="true"  />
+            <item id="RoomType.Code" label="Room Price Code"  type="TextBox"  readOnly="true"  />
+            <item id="AdditionalDetails" label="!rooms.room.AdditionalDetails"  type="specialized.multilinetextbox"  readOnly="false"  />
+
+          </items>
+        </section>
+
+        <section id="capacity" label="Capacity" constraints="column=1">
+          <items>
+            
+            <item id="Width" label="Room Width (ft)" type="TextBox"  readOnly="false"  column="0"/>
+            <item id="Length" label="Room Length (ft)" type="TextBox"  readOnly="false"  column="1"/>
+            <item id="CeilingHeight" label="Ceiling Height (ft)" type="TextBox"  readOnly="false"  column="0"/>
+            <item id="Area" label="Area (ft sq)" type="TextBox"  readOnly="false"  column="1"/>
+            
+          </items>
+        </section>
+        
+        
+
+
+      </layout>
+    </pane>
+
+    <pane id="rooms.pane.roomtype.details.roomfeatures" type="standard.pane.grouplayout" columns="1">
+      <layout>
+        <section id="general" label="Features" constraints="column=0">
+          <items>
+
+            <item id="RoomType.FeatureRoomTypes" labelVisibility="Collapsed" type="rooms.pane.roomtype.details.features.roomfeaturedetails"  readOnly="false" />
+
+          </items>
+        </section>
+      </layout>
+    </pane>
+
+    
+
+    <pane id="rooms.pane.roomtype.details.features.roomfeaturedetails" type="framework.pane.DataGridPane" columns="1">
+      <layout>
+        <section id="gridview" readOnly="false" constraints="column=0">
+          <items>
+
+            <item id="Feature.FeatureName" label="!rooms.feature.featurename" type="column"  readOnly="false"  width="1*" column="0"/>
+            <item id="Feature.Category" label="!rooms.feature.category" type="column"  readOnly="false"  width="1*" column="1"/>
+            <item id="Feature.Description" label="!rooms.feature.description" type="column"  readOnly="false"  width="1*" column="2"/>
+
+          </items>
+        </section>
+      </layout>
+    </pane>
+
+  </panes>
+  <!-- Add dialogs here -->
+  <dialogs>
+
+  </dialogs>
+
+  <!-- Add pages here-->
+  <pages>
+    <page id="Rooms.page.Room" name="Rooms" description="Add and maintain rooms information"
+            model="framework.pages.listviewmodel" type="framework.listitempage"
+            >
+
+      <modelProperties>
+        <property id="CreateMethod" value="Rooms/Room/Create" />
+        <property id="QueryMethod" value="Rooms/Room/Query" />
+        <property id="GetMethod" value="Rooms/Room/Get/{RoomId}" />
+        <property id="UpdateMethod" value="Rooms/Room/Update" />
+        <property id="RemoveMethod" value="Rooms/Room/Delete" />
+        <property id="IncludeChildRecords" value="true" type="Bool" />
+      </modelProperties>
+
+      <layout>
+
+        <section id="listView" readOnly="true" >
+          <items>
+            <item id="RoomNumber" type="TextBlock" labelVisibility="Collapsed">
+              <properties>
+                <property id="TextStyle" value="TitleText" />
+              </properties>
+            </item>
+
+            <item id="RoomType.RoomTypeName" type="TextBlock" labelVisibility="Collapsed">
+              <properties>
+                <property id="TextStyle" value="SubtleText" />
+              </properties>
+            </item>
+
+          </items>
+        </section>
+
+        <section id="roomdetails" label="" >
+          <items>
+            <item id="roomdata" label="" labelVisibility="Collapsed" type="rooms.pane.room.details" />
+            <item id="featuredata" label="" labelVisibility="Collapsed" type="rooms.pane.roomtype.details.roomfeatures" />
+          </items>
+        </section>
+        
+      </layout>
+
+      <actions>
+        <action id="clear" type="framework.ClearAction" />
+        <action id="refresh" type="framework.RefreshAction" />
+        <action id="refreshitem" type="standard.actions.refreshitem" />
+        <action id="save" type="framework.SaveAction" />
+        <action id="add" type="framework.CreateAction" />
+
+        <action id="delete" type="framework.DeleteAction" >
+          <properties>
+            <property id="IsAutoSave" value="true" type="Bool" />
+            <property id="IsUserConfirmationRequired" value="true" type="Bool" />
+          </properties>
+        </action>
+
+        <action id="clean" label="Clean" description="Clean Room" type="backoffice.cleanaction" icon="backoffice.icon.action.room.clean" group="#actions" iconSize="Small">
+          <conditions>
+            <condition property="RoomStatus" operator="In" value="Assigned;Dirty" />
+          </conditions>
+        </action>
+
+      </actions>
+
+    </page>
+  </pages>
+
+</ui>
